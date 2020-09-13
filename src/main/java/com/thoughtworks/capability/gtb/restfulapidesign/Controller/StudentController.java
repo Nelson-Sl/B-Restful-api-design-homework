@@ -4,6 +4,7 @@ import com.thoughtworks.capability.gtb.restfulapidesign.Domain.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.Service.StudentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,7 +19,10 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> getAllStudents() {
-        return this.studentService.getStudentList();
+    public List<Student> getAllStudents(@RequestParam(required = false) String gender) {
+        if(gender == null) {
+            return this.studentService.getStudentList();
+        }
+        return this.studentService.getStudentListByGender(gender);
     }
 }
