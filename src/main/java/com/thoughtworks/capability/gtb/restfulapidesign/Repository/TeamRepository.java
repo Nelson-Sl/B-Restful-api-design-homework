@@ -3,6 +3,7 @@ package com.thoughtworks.capability.gtb.restfulapidesign.Repository;
 import com.thoughtworks.capability.gtb.restfulapidesign.Common.GlobalVariables;
 import com.thoughtworks.capability.gtb.restfulapidesign.Domain.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.Domain.Team;
+import com.thoughtworks.capability.gtb.restfulapidesign.Dto.TeamUpdateNameOnly;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -29,6 +30,16 @@ public class TeamRepository {
     }
 
     public List<Team> getTeamList() {
+        return this.teamList;
+    }
+
+    public List<Team> changeTeamName(int id, TeamUpdateNameOnly teamName) {
+        for(Team team: teamList) {
+            if(team.getId() == id) {
+                team.setName(teamName.getName());
+                break;
+            }
+        }
         return this.teamList;
     }
 
