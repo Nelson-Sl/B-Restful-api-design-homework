@@ -1,6 +1,6 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.Service;
 
-import com.thoughtworks.capability.gtb.restfulapidesign.Common.ExceptionMessage;
+import com.thoughtworks.capability.gtb.restfulapidesign.Common.GlobalVariables;
 import com.thoughtworks.capability.gtb.restfulapidesign.Domain.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.Exception.GenderNotFoundException;
 import com.thoughtworks.capability.gtb.restfulapidesign.Exception.StudentNotFoundException;
@@ -24,7 +24,7 @@ public class StudentService {
     public List<Student> getStudentListByGender(String gender) {
         List<Student> studentListByGender = this.studentRepository.getStudentListByGender(gender);
         if(studentListByGender == null) {
-            throw new GenderNotFoundException(ExceptionMessage.GENDER_NOT_FOUND_EXCEPTION_MESSAGE);
+            throw new GenderNotFoundException(GlobalVariables.GENDER_NOT_FOUND_EXCEPTION_MESSAGE);
         }
         return studentListByGender;
     }
@@ -32,7 +32,7 @@ public class StudentService {
     public Student getStudentListById(int id) {
         Student studentById = this.studentRepository.getStudentListById(id);
         if(studentById == null) {
-            throw new StudentNotFoundException(ExceptionMessage.STUDENT_NOT_FOUND_EXCEPTION_MESSAGE);
+            throw new StudentNotFoundException(GlobalVariables.STUDENT_NOT_FOUND_EXCEPTION_MESSAGE);
         }
         return studentById;
     }

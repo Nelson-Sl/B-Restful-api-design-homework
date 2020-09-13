@@ -1,6 +1,6 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.Repository;
 
-import com.thoughtworks.capability.gtb.restfulapidesign.Common.ExceptionMessage;
+import com.thoughtworks.capability.gtb.restfulapidesign.Common.GlobalVariables;
 import com.thoughtworks.capability.gtb.restfulapidesign.Domain.Gender;
 import com.thoughtworks.capability.gtb.restfulapidesign.Domain.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.Exception.StudentNotFoundException;
@@ -56,7 +56,7 @@ public class StudentRepository {
                 .filter(student -> student.getId() == id)
                 .findFirst();
         if(!studentById.isPresent()) {
-            throw new StudentNotFoundException(ExceptionMessage.STUDENT_NOT_FOUND_EXCEPTION_MESSAGE);
+            throw new StudentNotFoundException(GlobalVariables.STUDENT_NOT_FOUND_EXCEPTION_MESSAGE);
         }
         studentList.remove(studentById.get());
     }
