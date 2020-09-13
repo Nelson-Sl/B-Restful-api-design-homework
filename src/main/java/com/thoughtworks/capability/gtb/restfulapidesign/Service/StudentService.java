@@ -31,4 +31,8 @@ public class StudentService {
     public Student addNewStudent(Student student) {
         return this.studentRepository.addStudent(student);
     }
+
+    public void deleteStudent(Integer id) {
+        this.studentRepository.deleteStudent(id);
+    }
 }

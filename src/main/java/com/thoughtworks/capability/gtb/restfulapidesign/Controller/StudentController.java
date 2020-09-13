@@ -29,4 +29,10 @@ public class StudentController {
     public Student addNewStudent(@RequestBody Student student) {
         return this.studentService.addNewStudent(student);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteStudent(@PathVariable Integer id) {
+        this.studentService.deleteStudent(id);
+    }
 }

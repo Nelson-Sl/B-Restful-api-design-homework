@@ -4,6 +4,7 @@ import com.thoughtworks.capability.gtb.restfulapidesign.Common.ExceptionMessage;
 import com.thoughtworks.capability.gtb.restfulapidesign.Domain.Gender;
 import com.thoughtworks.capability.gtb.restfulapidesign.Domain.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.Exception.GenderNotFoundException;
+import com.thoughtworks.capability.gtb.restfulapidesign.Exception.StudentNotFoundException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Repository;
 
@@ -39,5 +40,17 @@ public class StudentRepository {
         student.setId(studentList.size() + 1);
         studentList.add(student);
         return student;
+    }
+
+    public synchronized void deleteStudent(Integer id) {
+        if(id > studentList.size()) {
+            throw new StudentNotFoundException(ExceptionMessage.STUDENT_NOT_FOUND_EXCEPTION_MESSAGE);
+        }
+        for(Student stu: studentList) {
+            if(stu.getId() == id) {
+                studentList.remove(stu);
+                break;
+            }
+        }
     }
 }
