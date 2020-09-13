@@ -27,4 +27,8 @@ public class StudentService {
         }
         return studentListByGender;
     }
+
+    public Student addNewStudent(Student student) {
+        return this.studentRepository.addStudent(student);
+    }
 }

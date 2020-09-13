@@ -4,6 +4,7 @@ import com.thoughtworks.capability.gtb.restfulapidesign.Common.ExceptionMessage;
 import com.thoughtworks.capability.gtb.restfulapidesign.Domain.Gender;
 import com.thoughtworks.capability.gtb.restfulapidesign.Domain.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.Exception.GenderNotFoundException;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -32,5 +33,11 @@ public class StudentRepository {
         }catch(IllegalArgumentException ex) {
             return null;
         }
+    }
+
+    public synchronized Student addStudent(Student student) {
+        student.setId(studentList.size() + 1);
+        studentList.add(student);
+        return student;
     }
 }
