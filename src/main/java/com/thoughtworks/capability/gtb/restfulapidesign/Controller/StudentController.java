@@ -24,6 +24,11 @@ public class StudentController {
         return this.studentService.getStudentListByGender(gender);
     }
 
+    @GetMapping("/{id}")
+    public Student getAllStudentsById(@PathVariable int id) {
+        return this.studentService.getStudentListById(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Student addNewStudent(@RequestBody Student student) {
