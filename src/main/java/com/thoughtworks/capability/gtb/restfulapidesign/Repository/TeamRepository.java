@@ -28,6 +28,10 @@ public class TeamRepository {
         return teamList;
     }
 
+    public List<Team> getTeamList() {
+        return this.teamList;
+    }
+
     private void generateTeams() {
         for (int teamId = 1; teamId <= GlobalVariables.TEAM_COUNT; teamId++) {
             String teamName = GlobalVariables.TEAM_NAME_PREFIX + teamId;

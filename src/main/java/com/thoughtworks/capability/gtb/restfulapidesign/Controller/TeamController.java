@@ -4,10 +4,7 @@ import com.thoughtworks.capability.gtb.restfulapidesign.Domain.Team;
 import com.thoughtworks.capability.gtb.restfulapidesign.Service.StudentService;
 import com.thoughtworks.capability.gtb.restfulapidesign.Service.TeamService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +21,10 @@ public class TeamController {
     @ResponseStatus(HttpStatus.CREATED)
     public List<Team> generateTeamList() {
         return this.teamService.generateTeamList();
+    }
+
+    @GetMapping
+    public List<Team> getTeamList() {
+        return this.teamService.getTeamList();
     }
 }

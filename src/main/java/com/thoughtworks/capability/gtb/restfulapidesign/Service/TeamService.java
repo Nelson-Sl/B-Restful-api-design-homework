@@ -18,4 +18,8 @@ public class TeamService {
     public List<Team> generateTeamList() {
         return this.teamRepository.generateTeamList();
     }
+
+    public List<Team> getTeamList() {
+        return this.teamRepository.getTeamList();
+    }
 }
