@@ -5,11 +5,13 @@ import com.thoughtworks.capability.gtb.restfulapidesign.Domain.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.Domain.Team;
 import com.thoughtworks.capability.gtb.restfulapidesign.Dto.TeamUpdateNameOnly;
 import com.thoughtworks.capability.gtb.restfulapidesign.Exception.TeamNameExistedException;
+import com.thoughtworks.capability.gtb.restfulapidesign.Exception.TeamNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class TeamRepository {
@@ -35,12 +37,15 @@ public class TeamRepository {
     }
 
     public synchronized List<Team> changeTeamName(int id, TeamUpdateNameOnly teamName) {
+        Optional<Team> changingTeam = teamList.stream().filter(team -> team.getId() == id).findFirst();
+        if(!changingTeam.isPresent()) {
+            throw new TeamNotFoundException(GlobalVariables.TEAM_NOT_FOUND_EXCEPTION_MESSAGE);
+        }
         boolean isTeamNameExisted = teamList.stream().anyMatch(team -> team.getName().equals(teamName.getName()));
         if(isTeamNameExisted) {
             throw new TeamNameExistedException(GlobalVariables.TEAM_NAME_EXISTED_EXCEPTION_MESSAGE);
         }
-        Team changingTeam = teamList.stream().filter(team -> team.getId() == id).findFirst().get();
-        changingTeam.setName(teamName.getName());
+        changingTeam.get().setName(teamName.getName());
         return this.teamList;
     }
 
